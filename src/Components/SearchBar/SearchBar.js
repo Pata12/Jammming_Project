@@ -10,10 +10,19 @@ class SearchBar extends Component {
 		};
 		this.search = this.search.bind(this);
 		this.handleTermChange = this.handleTermChange.bind(this);
+		this.checkKeyPress = this.checkKeyPress.bind(this);
 	}
-		
+	
+	checkKeyPress(event){
+		if(event.key == 'Enter'){
+			this.search();
+		}
+	}
+	
 	search(){
-		this.props.onSearch(this.state.term);
+		if(this.state.term){
+			this.props.onSearch(this.state.term);
+		}
 	}
 	
 	handleTermChange(event){
@@ -23,7 +32,7 @@ class SearchBar extends Component {
 	render(){
 		return (
 		<div className="SearchBar">
-		  <input placeholder="Enter A Song, Album, or Artist" onChange={this.handleTermChange} />
+		  <input placeholder="Enter A Song, Album, or Artist" onChange={this.handleTermChange} onKeyPress={this.checkKeyPress}/>
 		  <a onClick={this.search}>SEARCH</a>
 		</div>
 		);
